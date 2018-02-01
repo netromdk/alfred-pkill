@@ -8,7 +8,7 @@ import sys
 import subprocess
 import re
 
-from workflow import Workflow3, ICON_NOTE
+from workflow import Workflow3, ICON_NOTE, ICON_BURN
 
 # "PID STAT COMMAND"
 PROC_REGEX = re.compile(r'(\d+?)\s+(.+?)\s+(.+)')
@@ -56,7 +56,7 @@ def main(wf):
 
   for result in results:
     item = wf.add_item(title = result[1], subtitle = 'Action: kill -TERM {}'.format(result[0]),
-                       arg = kill_args('-TERM', result[0]), valid = True)
+                       arg = kill_args('-TERM', result[0]), valid = True, icon = ICON_BURN)
     item.add_modifier(key = 'alt', subtitle = 'Action: kill -KILL {}'.format(result[0]),
                       arg = kill_args('-KILL', result[0]))
     item.add_modifier(key = 'ctrl', subtitle = 'Action: kill -STOP {}'.format(result[0]),
