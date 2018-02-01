@@ -13,6 +13,8 @@ from workflow import Workflow3, ICON_NOTE, ICON_BURN, ICON_SYNC
 # "PID STAT COMMAND"
 PROC_REGEX = re.compile(r'(\d+?)\s+(.+?)\s+(.+)')
 
+log = None
+
 # Returns a list of tuples (PID, COMMAND).
 def user_processes():
   output = subprocess.check_output('ps x -o pid,stat,command; exit 0',
@@ -28,15 +30,19 @@ def user_processes():
 
 def search(text, wf):
   procs = user_processes()
+  log.debug('#procs: "{}"'.format(len(procs)))
 
   # Filter on process names.
+  log.debug('filtering..')
   procs = wf.filter(text, procs, key = lambda p: p[1], min_score = 60, max_results = 50)
+  log.debug('#filtered: "{}"'.format(len(procs)))
 
   # Remove our own process.
   pid = unicode(os.getpid())
   for i in range(len(procs)):
     val = procs[i]
     if pid == val[0]:
+      log.debug('found and removed ourself: "{}"'.format(val))
       del(procs[i])
       break
 
@@ -54,7 +60,10 @@ def main(wf):
   args = wf.args
   text = args[0].strip().lower()
 
+  log.debug('input: "{}"'.format(text))
+
   results = search(text, wf)
+  log.debug('#results: "{}"'.format(len(results)))
 
   if len(results) == 0:
     wf.add_item(title = 'No results found.. Try with another query.', icon = ICON_NOTE)
@@ -71,4 +80,5 @@ def main(wf):
 
 if __name__ == '__main__':
   wf = Workflow3(update_settings = {'github_slug': 'netromdk/alfred-pkill', 'frequency': 7})
+  log = wf.logger
   sys.exit(wf.run(main))
