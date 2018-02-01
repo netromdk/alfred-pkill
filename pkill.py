@@ -42,6 +42,9 @@ def search(text, wf):
 
   return procs
 
+def kill_args(sig_arg, pid):
+  return '{} {}'.format(sig_arg, pid)
+
 def main(wf):
   args = wf.args
   text = args[0].strip().lower()
@@ -52,8 +55,12 @@ def main(wf):
     wf.add_item(title = 'No results found.. Try with another query.', icon = ICON_NOTE)
 
   for result in results:
-    wf.add_item(title = result[1], subtitle = 'Action: kill -TERM {}'.format(result[0]),
-                arg = result[0], valid = True)
+    item = wf.add_item(title = result[1], subtitle = 'Action: kill -TERM {}'.format(result[0]),
+                       arg = kill_args('-TERM', result[0]), valid = True)
+    item.add_modifier(key = 'alt', subtitle = 'Action: kill -KILL {}'.format(result[0]),
+                      arg = kill_args('-KILL', result[0]))
+    item.add_modifier(key = 'ctrl', subtitle = 'Action: kill -STOP {}'.format(result[0]),
+                      arg = kill_args('-STOP', result[0]))
 
   wf.send_feedback()
 
