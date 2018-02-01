@@ -30,7 +30,7 @@ def search(text, wf):
   procs = user_processes()
 
   # Filter on process names.
-  procs = wf.filter(text, procs, key = lambda p: p[1], min_score = 80, max_results = 50)
+  procs = wf.filter(text, procs, key = lambda p: p[1], min_score = 60, max_results = 50)
 
   # Remove our own process.
   pid = unicode(os.getpid())
