@@ -8,7 +8,7 @@ import sys
 import subprocess
 import re
 
-from workflow import Workflow3, ICON_NOTE, ICON_BURN
+from workflow import Workflow3, ICON_NOTE, ICON_BURN, ICON_SYNC
 
 # "PID STAT COMMAND"
 PROC_REGEX = re.compile(r'(\d+?)\s+(.+?)\s+(.+)')
@@ -46,6 +46,11 @@ def kill_args(sig_arg, pid):
   return '{} {}'.format(sig_arg, pid)
 
 def main(wf):
+  if wf.update_available:
+    wf.add_item('New version available',
+                'Action this item to install the update',
+                autocomplete = 'workflow:update', icon = ICON_SYNC)
+
   args = wf.args
   text = args[0].strip().lower()
 
@@ -65,5 +70,5 @@ def main(wf):
   wf.send_feedback()
 
 if __name__ == '__main__':
-  wf = Workflow3()
+  wf = Workflow3(update_settings = {'github_slug': 'netromdk/alfred-pkill', 'frequency': 7})
   sys.exit(wf.run(main))
