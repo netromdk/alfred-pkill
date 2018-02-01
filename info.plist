@@ -106,7 +106,9 @@ kill $query</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string>This workflow for Alfred app enables to search for running processes and kill one of them.
+
+Type "kill" and the input to fuzzy search for. Action on an item will kill it.</string>
 	<key>uidata</key>
 	<dict>
 		<key>5E4922C0-EB96-4C48-A8AE-D06D48348EDC</key>
@@ -124,6 +126,8 @@ kill $query</string>
 			<integer>40</integer>
 		</dict>
 	</dict>
+	<key>version</key>
+	<string>0.1.0</string>
 	<key>webaddress</key>
 	<string>https://github.com/netromdk/alfred-pkill</string>
 </dict>
