@@ -11,7 +11,8 @@ import re
 from workflow import Workflow3, ICON_NOTE, ICON_BURN, ICON_SYNC
 
 # "PID STAT COMMAND"
-PROC_REGEX = re.compile(r'(\d+?)\s+(.+?)\s+(.+)')
+# Only match sane values for the commands.
+PROC_REGEX = re.compile(r'(\d+?)\s+(.+?)\s+([\w\d\s\-\\\/\.:;,]+)')
 
 log = None
 
