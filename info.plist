@@ -127,7 +127,7 @@ Type "kill" and the input to fuzzy search for. Action on an item will kill it.</
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.2.0</string>
+	<string>0.2.1</string>
 	<key>webaddress</key>
 	<string>https://github.com/netromdk/alfred-pkill</string>
 </dict>
