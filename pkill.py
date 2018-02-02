@@ -35,7 +35,7 @@ def search(text, wf):
 
   # Filter on process names.
   log.debug('filtering..')
-  procs = wf.filter(text, procs, key = lambda p: p[1], min_score = 60, max_results = 50)
+  procs = wf.filter(text, procs, key = lambda p: p[1], min_score = 80, max_results = 50)
   log.debug('#filtered: "{}"'.format(len(procs)))
 
   # Remove our own process.
@@ -59,8 +59,11 @@ def main(wf):
                 autocomplete = 'workflow:update', icon = ICON_SYNC)
 
   args = wf.args
-  text = args[0].strip().lower()
 
+  all_mode = (args[0].strip().lower() == 'all')
+  log.debug('all_mode: "{}"'.format(all_mode))
+
+  text = args[1].strip().lower()
   log.debug('input: "{}"'.format(text))
 
   results = search(text, wf)
@@ -69,13 +72,17 @@ def main(wf):
   if len(results) == 0:
     wf.add_item(title = 'No results found.. Try with another query.', icon = ICON_NOTE)
 
+  pids = ' '.join(p[0] for p in results) if all_mode else ''
+
   for result in results:
-    item = wf.add_item(title = result[1], subtitle = 'Action: kill -TERM {}'.format(result[0]),
-                       arg = kill_args('-TERM', result[0]), valid = True, icon = ICON_BURN)
-    item.add_modifier(key = 'alt', subtitle = 'Action: kill -KILL {}'.format(result[0]),
-                      arg = kill_args('-KILL', result[0]))
-    item.add_modifier(key = 'ctrl', subtitle = 'Action: kill -STOP {}'.format(result[0]),
-                      arg = kill_args('-STOP', result[0]))
+    if not all_mode:
+      pids = result[0]
+    item = wf.add_item(title = result[1], subtitle = 'Action: kill -TERM {}'.format(pids),
+                       arg = kill_args('-TERM', pids), valid = True, icon = ICON_BURN)
+    item.add_modifier(key = 'alt', subtitle = 'Action: kill -KILL {}'.format(pids),
+                      arg = kill_args('-KILL', pids))
+    item.add_modifier(key = 'ctrl', subtitle = 'Action: kill -STOP {}'.format(pids),
+                      arg = kill_args('-STOP', pids))
 
   wf.send_feedback()
 

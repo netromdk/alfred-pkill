@@ -8,6 +8,19 @@
 	<string>Productivity</string>
 	<key>connections</key>
 	<dict>
+		<key>9AB8E42A-D637-4F29-93E6-FC5D080BC885</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>5E4922C0-EB96-4C48-A8AE-D06D48348EDC</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
 		<key>A3A72E96-28FB-463E-848E-C5FBB247161B</key>
 		<array>
 			<dict>
@@ -58,7 +71,7 @@
 				<key>runningsubtext</key>
 				<string>Please wait while searching for "{query}"...</string>
 				<key>script</key>
-				<string>python pkill.py "{query}"</string>
+				<string>python pkill.py "one" "{query}"</string>
 				<key>scriptargtype</key>
 				<integer>0</integer>
 				<key>scriptfile</key>
@@ -104,11 +117,60 @@ kill $query</string>
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>killall</string>
+				<key>queuedelaycustom</key>
+				<integer>3</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
+				<key>runningsubtext</key>
+				<string>Please wait while searching for "{query}"...</string>
+				<key>script</key>
+				<string>python pkill.py "all" "{query}"</string>
+				<key>scriptargtype</key>
+				<integer>0</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Search for processes "{query}"</string>
+				<key>title</key>
+				<string>Kill all Processes</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>9AB8E42A-D637-4F29-93E6-FC5D080BC885</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string>This workflow for Alfred app enables to search for running processes and kill one of them.
 
-Type "kill" and the input to fuzzy search for. Action on an item will kill it.</string>
+Type "kill" and the input to fuzzy search for. Action on an item will kill it.
+
+Type "killall" in the same way but action will kill all filtered processes.</string>
 	<key>uidata</key>
 	<dict>
 		<key>5E4922C0-EB96-4C48-A8AE-D06D48348EDC</key>
@@ -117,6 +179,13 @@ Type "kill" and the input to fuzzy search for. Action on an item will kill it.</
 			<integer>260</integer>
 			<key>ypos</key>
 			<integer>40</integer>
+		</dict>
+		<key>9AB8E42A-D637-4F29-93E6-FC5D080BC885</key>
+		<dict>
+			<key>xpos</key>
+			<integer>50</integer>
+			<key>ypos</key>
+			<integer>170</integer>
 		</dict>
 		<key>A3A72E96-28FB-463E-848E-C5FBB247161B</key>
 		<dict>
