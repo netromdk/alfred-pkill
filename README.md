@@ -6,3 +6,5 @@ Use keyword `kill` to initiate the workflow. The input is used to fuzzy-filter a
 The `killall` keyword can be used in the same way but will kill all filtered process results.
 
 The workflow automatically checks for new releases. With a 7 day frequency, it will check and if an update is available, then it shows an item at the top in Alfred that will update the workflow when actioned/auto-completed.
+
+![alfred-pkill example](https://github.com/netromdk/alfred-pkill/blob/master/example.gif)
