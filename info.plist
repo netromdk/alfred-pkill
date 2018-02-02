@@ -196,7 +196,7 @@ Type "killall" in the same way but action will kill all filtered processes.</str
 		</dict>
 	</dict>
 	<key>version</key>
-	<string>0.2.1</string>
+	<string>0.3.0</string>
 	<key>webaddress</key>
 	<string>https://github.com/netromdk/alfred-pkill</string>
 </dict>
